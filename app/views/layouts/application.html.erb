@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Traveler</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>PoteShare</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -11,19 +10,39 @@
   </head>
 
   <body>
-    <header>
-      <h1>Ruby on Rails</h1>
-    </header>
+    <header class="header">
+    <div class="header-inner">
+    <div class="header-left-nav">
+        <a href="/"><img alt="サイトのロゴ画像" src="/assets/logo.png" /></a>
+        <form action="https://presite-potepancamp-rails-02.herokuapp.com/rooms/search" accept-charset="UTF-8" method="get">
+        <div class="header-sharch d-lg-inline-block d-none">
+          <input type="text" name="area" id="area" value="" class="form-control" placeholder="エリア" />
+          <i class="fas fa-map-marker-alt"></i>
+        </div>
+        <div class="header-sharch d-lg-inline-block d-none">
+          <input type="text" name="keyword" id="keyword" value="" class="form-control" placeholder="キーワード" />
+          <i class="fas fa-search"></i>
+        </div>
+        <input type="submit" name="commit" value="" class="d-none" data-disable-with="" />
+        </form>
+        </div>
+      <div class="header-right-nav">
+          <div class="nav-item">
+            <% if user_signed_in? %>
+              <%= link_to "トップ", rooms_path %>
+              <%= link_to '投稿画面へ', new_room_path%>
+              <%= link_to "アカウント編集", edit_user_registration_path %>
+              <%= link_to "ログアウト", destroy_user_session_path, method: :delete, data:{ comfirm:"ログアウトしますか"} %>
+            <% else %>
+              <%= link_to "ログイン", new_user_session_path %>
+              <%= link_to "アカウント登録", new_user_registration_path %>
+            <% end %>
+          </div>
+      </div>
+  </div>
+</header>
+  <body>
     <!-- ***** 以下を追加 ***** -->
-    <% if user_signed_in? %>
-      <!-- ログイン時 -->
-      <%= link_to "アカウント編集", edit_user_registration_path %>
-      <%= link_to "ログアウト", destroy_user_session_path, method: :delete, data: { confirm: "ログアウトしますか？" } %>
-    <% else %>
-      <!-- 非ログイン時 -->
-      <%= link_to "ログイン", new_user_session_path %>
-      <%= link_to "アカウント登録", new_user_registration_path %>
-    <% end %>
     <!-- ***** 以上を追加 ***** -->
     <%= yield %>
     <footer>
