@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
+  get 'users/show'
   get 'rooms/index'
-  get 'rooms/show'
   get 'rooms/new'
   get 'rooms/create'
   get 'rooms/edit'
